@@ -18,7 +18,7 @@ const LoginScreen = () => {
     };
 
     return (
-        <ScrollView>
+        <ScrollView className='h-full bg-white' >
             <View className='flex-1 items-center justify-start' >
                 <Image className='h-96' source={require('../../assets/images/bg.png')} resizeMode='cover' style={{ width: screenWidth }} />
                 <View className='w-full h-full bg-white rounded-tl-[90px] -mt-44 flex items-center justify-start py-6 px-6 space-y-6' >

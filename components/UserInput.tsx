@@ -18,6 +18,8 @@ const UserInput = ({ value, placeholder, onChangeText, isPass }: Props) => {
             return 'email'
         } else if (placeholder === 'Password') {
             return 'lock'
+        } else if (placeholder === 'Full Name') {
+            return 'person'
         }
     }
     return (
@@ -28,7 +30,7 @@ const UserInput = ({ value, placeholder, onChangeText, isPass }: Props) => {
 
             {isPass &&
                 <TouchableOpacity onPress={() => setShowPass(!showPass)} >
-                    <Entypo name={showPass ? "eye" : "eye-with-line"} size={24} color="gray" />
+                    <Entypo name={showPass ? "eye-with-line" : "eye"} size={24} color="gray" />
                 </TouchableOpacity>
             }
         </View>
