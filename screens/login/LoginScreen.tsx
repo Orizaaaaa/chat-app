@@ -3,8 +3,8 @@ import React from 'react'
 
 const LoginScreen = () => {
     return (
-        <View>
-            <Text>LoginScreen</Text>
+        <View className='flex-1 items-center justify-start' >
+            <Text>LoginScreeeen</Text>
         </View>
     )
 }
