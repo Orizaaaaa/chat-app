@@ -21,7 +21,7 @@ const UserInput = ({ value, placeholder, onChangeText, isPass }: Props) => {
         }
     }
     return (
-        <View className='border rounded-2xl px-4 py-6 flex-row items-center justify-between space-x-4 my-2 border-gray-200 '  >
+        <View className='border rounded-2xl px-4 py-6 flex-row items-center justify-between space-x-4  border-gray-200 '  >
             <MaterialIcons name={icons(placeholder)} size={24} color="gray" />
             <TextInput className='flex-1 text-base Text-PrimaryText' placeholder={placeholder} value={value} onChangeText={onChangeText}
                 secureTextEntry={showPass} autoCapitalize='none' />

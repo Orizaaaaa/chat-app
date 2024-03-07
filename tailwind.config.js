@@ -11,6 +11,9 @@ module.exports = {
         primary: "#43C651",
         primaryBold: "#056526",
         primaryText: "#555",
+      },
+      backgroundColor: {
+        primary: "#43C651",
       }
     },
   },

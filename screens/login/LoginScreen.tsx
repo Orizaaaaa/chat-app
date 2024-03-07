@@ -1,8 +1,11 @@
-import { View, Text, Image, Dimensions } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, Image, Dimensions, TouchableOpacity } from 'react-native'
+import React, { ReactNode, useState } from 'react'
 import UserInput from '../../components/UserInput'
+import { useNavigation } from '@react-navigation/native'
 
 const LoginScreen = () => {
+
+    const navigation: any = useNavigation();
     const screenWidth = Math.round(Dimensions.get("window").width)
 
     const [formData, setFormData] = useState({
@@ -13,8 +16,6 @@ const LoginScreen = () => {
     const handleChange = (name: string, text: string) => {
         setFormData({ ...formData, [name]: text });
     };
-
-
 
     return (
         <View className='flex-1 items-center justify-start' >
@@ -29,6 +30,19 @@ const LoginScreen = () => {
 
                 <View className='w-full flex items-center justify-center' >
                     <UserInput placeholder='Password' value={formData.password} onChangeText={(text) => handleChange('password', text)} isPass={true} />
+                </View>
+
+                <TouchableOpacity className='w-full px-4 py-2 rounded-2xl my-3 bg-primary flex items-center justify-center  ' >
+                    <Text className='py-2 text-lg text-white' >
+                        Sign In
+                    </Text>
+                </TouchableOpacity>
+
+                <View className='flex w-full py-12 flex-row items-center justify-center space-x-2' >
+                    <Text> Don't have an account?</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("signup")}>
+                        <Text className='text-primaryBold ' >Create Here</Text>
+                    </TouchableOpacity>
                 </View>
 
             </View>
