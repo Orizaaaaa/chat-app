@@ -42,7 +42,7 @@ const LoginScreen = () => {
                     <View className='flex w-full py-12 flex-row items-center justify-center space-x-2' >
                         <Text> Don't have an account?</Text>
                         <TouchableOpacity onPress={() => navigation.navigate("signup")}>
-                            <Text className='text-primaryBold ' >Create Here</Text>
+                            <Text className='text-primaryBold font-semibold' >Create Here</Text>
                         </TouchableOpacity>
                     </View>
 

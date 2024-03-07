@@ -38,14 +38,14 @@ const SignUpScreen = () => {
 
                     <TouchableOpacity className='w-full px-4 py-2 rounded-2xl my-3 bg-primary flex items-center justify-center  ' >
                         <Text className='py-2 text-lg text-white' >
-                            Sign In
+                            Sign Up
                         </Text>
                     </TouchableOpacity>
 
                     <View className='flex w-full pt-5 flex-row items-center justify-center space-x-2' >
-                        <Text> Don't have an account?</Text>
+                        <Text> Have an account!</Text>
                         <TouchableOpacity onPress={() => navigation.navigate("login")}>
-                            <Text className='text-primaryBold ' >Create Here</Text>
+                            <Text className='text-primaryBold font-semibold' >Login Here</Text>
                         </TouchableOpacity>
                     </View>
 
