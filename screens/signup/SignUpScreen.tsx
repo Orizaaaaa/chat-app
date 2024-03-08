@@ -1,5 +1,5 @@
 import { View, Text, Image, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import UserInput from '../../components/UserInput'
 import { useNavigation } from '@react-navigation/native'
 import { avatars } from '../../utils/utils'
@@ -37,7 +37,6 @@ const SignUpScreen = () => {
         }
     }, [formData.email]);
 
-    console.log(emailValidate);
 
 
     return (

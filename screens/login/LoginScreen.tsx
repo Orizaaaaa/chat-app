@@ -1,5 +1,5 @@
 import { View, Text, Image, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import UserInput from '../../components/UserInput'
 import { useNavigation } from '@react-navigation/native'
 
@@ -17,6 +17,15 @@ const LoginScreen = () => {
         setFormData({ ...formData, [name]: text });
     };
 
+
+    const [emailValidate, setEmailValidate] = useState(true)
+    useEffect(() => {
+        if (formData.email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            setEmailValidate(emailRegex.test(formData.email));
+        }
+    }, [formData.email]);
+
     return (
         <ScrollView className='h-full bg-white' >
             <View className='flex-1 items-center justify-start' >
@@ -26,7 +35,8 @@ const LoginScreen = () => {
                     <Text className='text-primaryText text-3xl font-semibold' > Welcome Back! </Text>
 
                     <View className='w-full flex items-center justify-center' >
-                        <UserInput placeholder='Email' value={formData.email} onChangeText={(text) => handleChange('email', text)} isPass={false} />
+                        <UserInput placeholder='Email' value={formData.email} onChangeText={(text) => handleChange('email', text)} isPass={false}
+                            border={emailValidate ? 'border-gray-200' : 'border-red-500'} />
                     </View>
 
                     <View className='w-full flex items-center justify-center' >
