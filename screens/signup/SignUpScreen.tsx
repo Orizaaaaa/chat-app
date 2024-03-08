@@ -1,5 +1,5 @@
 import { View, Text, Image, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import UserInput from '../../components/UserInput'
 import { useNavigation } from '@react-navigation/native'
 import { avatars } from '../../utils/utils'
@@ -28,6 +28,17 @@ const SignUpScreen = () => {
         setAvatarMenu(false)
         setAvatar(item.image.asset.url)
     }
+
+    const [emailValidate, setEmailValidate] = useState(true)
+    useEffect(() => {
+        if (formData.email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            setEmailValidate(emailRegex.test(formData.email));
+        }
+    }, [formData.email]);
+
+    console.log(emailValidate);
+
 
     return (
         <ScrollView className='h-full bg-white' >
@@ -76,7 +87,8 @@ const SignUpScreen = () => {
                     </View>
 
                     <View className='w-full flex items-center justify-center' >
-                        <UserInput placeholder='Email' value={formData.email} onChangeText={(text) => handleChange('email', text)} isPass={false} />
+                        <UserInput placeholder='Email' value={formData.email} onChangeText={(text) => handleChange('email', text)} isPass={false}
+                            border={emailValidate ? 'border-gray-200' : 'border-red-500'} />
                     </View>
 
                     <View className='w-full flex items-center justify-center' >
