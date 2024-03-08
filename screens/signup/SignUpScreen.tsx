@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native'
 import { avatars } from '../../utils/utils'
 import { MaterialIcons } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { firebaseAuth } from '../../config/firebase.config'
 
 const SignUpScreen = () => {
     const navigation: any = useNavigation();
@@ -38,6 +40,17 @@ const SignUpScreen = () => {
     }, [formData.email]);
 
 
+    const handleSignUp = async () => {
+        if (emailValidate && formData.email !== '') {
+            await createUserWithEmailAndPassword(firebaseAuth, formData.email, formData.password).then(userCred => {
+                console.log(userCred.user);
+
+
+            })
+        } else {
+
+        }
+    }
 
     return (
         <ScrollView className='h-full bg-white' >
@@ -94,7 +107,7 @@ const SignUpScreen = () => {
                         <UserInput placeholder='Password' value={formData.password} onChangeText={(text) => handleChange('password', text)} isPass={true} />
                     </View>
 
-                    <TouchableOpacity className='w-full px-4 py-2 rounded-2xl  bg-primary flex items-center justify-center  ' >
+                    <TouchableOpacity onPress={handleSignUp} className='w-full px-4 py-2 rounded-2xl  bg-primary flex items-center justify-center  ' >
                         <Text className='py-2 text-lg text-white' >
                             Sign Up
                         </Text>
