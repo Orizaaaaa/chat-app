@@ -11,7 +11,7 @@ type Props = {
 }
 
 const UserInput = ({ value, placeholder, onChangeText, isPass }: Props) => {
-    const [showPass, setShowPass] = useState(false)
+    const [showPass, setShowPass] = useState(true)
 
     const icons = (placeholder: any) => {
         if (placeholder === 'Email') {
@@ -26,7 +26,7 @@ const UserInput = ({ value, placeholder, onChangeText, isPass }: Props) => {
         <View className='border rounded-2xl px-4 py-6 flex-row items-center justify-between space-x-4  border-gray-200 '  >
             <MaterialIcons name={icons(placeholder)} size={24} color="gray" />
             <TextInput className='flex-1 text-base Text-PrimaryText' placeholder={placeholder} value={value} onChangeText={onChangeText}
-                secureTextEntry={showPass} autoCapitalize='none' />
+                secureTextEntry={isPass ? showPass : undefined} autoCapitalize='none' />
 
             {isPass &&
                 <TouchableOpacity onPress={() => setShowPass(!showPass)} >

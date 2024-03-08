@@ -28,7 +28,7 @@ const SignUpScreen = () => {
                     <Image className='w-16 h-16 ' resizeMode='contain' source={require('../../assets/images/logo.png')} />
                     <Text className='text-primaryText text-3xl font-semibold' > Join with us! </Text>
 
-                    <View className='w-full flex items-center justify-center relative -my-4' >
+                    <View className='w-full flex items-center justify-center relative ' >
                         <TouchableOpacity className='w-20 h-20 rounded-full border-2 bg-primary relative border-green-400' >
                             <Image source={{ uri: avatar }} className='w-full h-full' resizeMode='contain' />
                             <View className='h-6 w-6 bg-primary rounded-full absolute top-0 right-0 flex items-center justify-center' >
@@ -49,13 +49,13 @@ const SignUpScreen = () => {
                         <UserInput placeholder='Password' value={formData.password} onChangeText={(text) => handleChange('password', text)} isPass={true} />
                     </View>
 
-                    <TouchableOpacity className='w-full px-4 py-2 rounded-2xl my-3 bg-primary flex items-center justify-center  ' >
+                    <TouchableOpacity className='w-full px-4 py-2 rounded-2xl  bg-primary flex items-center justify-center  ' >
                         <Text className='py-2 text-lg text-white' >
                             Sign Up
                         </Text>
                     </TouchableOpacity>
 
-                    <View className='flex w-full pt-5 flex-row items-center justify-center space-x-2' >
+                    <View className='flex w-full  flex-row items-center justify-center space-x-2' >
                         <Text> Have an account!</Text>
                         <TouchableOpacity onPress={() => navigation.navigate("login")}>
                             <Text className='text-primaryBold font-semibold' >Login Here</Text>
