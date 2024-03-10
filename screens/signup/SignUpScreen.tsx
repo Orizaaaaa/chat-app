@@ -13,6 +13,7 @@ const SignUpScreen = () => {
     const screenWidth = Math.round(Dimensions.get("window").width)
     const screenHeight = Dimensions.get("window").height
 
+    // form data input
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
@@ -23,6 +24,7 @@ const SignUpScreen = () => {
         setFormData({ ...formData, [name]: text });
     };
 
+    // avatar
     const [avatar, setAvatar] = useState(avatars[0]?.image.asset.url)
     const [avatarMenu, setAvatarMenu] = useState(false)
 
@@ -31,6 +33,7 @@ const SignUpScreen = () => {
         setAvatar(item.image.asset.url)
     }
 
+    // email regex
     const [emailValidate, setEmailValidate] = useState(true)
     useEffect(() => {
         if (formData.email) {
@@ -40,13 +43,15 @@ const SignUpScreen = () => {
     }, [formData.email]);
 
 
+    // send signUp data with firebase
     const handleSignUp = async () => {
         if (emailValidate && formData.email !== '') {
-            await createUserWithEmailAndPassword(firebaseAuth, formData.email, formData.password).then(userCred => {
-                console.log(userCred.user);
+            await createUserWithEmailAndPassword(firebaseAuth, formData.email, formData.password)
+                .then(userCred => {
+                    console.log(userCred.user);
 
 
-            })
+                })
         } else {
 
         }
