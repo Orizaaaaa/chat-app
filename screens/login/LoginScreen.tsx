@@ -2,22 +2,24 @@ import { View, Text, Image, Dimensions, TouchableOpacity, ScrollView } from 'rea
 import React, { ReactNode, useEffect, useState } from 'react'
 import UserInput from '../../components/UserInput'
 import { useNavigation } from '@react-navigation/native'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { firebaseAuth, firestoreDB } from '../../config/firebase.config'
+import { doc, getDoc } from 'firebase/firestore'
 
 const LoginScreen = () => {
-
     const navigation: any = useNavigation();
     const screenWidth = Math.round(Dimensions.get("window").width)
 
+    // formData
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     })
-
     const handleChange = (name: string, text: string) => {
         setFormData({ ...formData, [name]: text });
     };
 
-
+    // validation regex
     const [emailValidate, setEmailValidate] = useState(true)
     useEffect(() => {
         if (formData.email) {
@@ -25,6 +27,38 @@ const LoginScreen = () => {
             setEmailValidate(emailRegex.test(formData.email));
         }
     }, [formData.email]);
+
+    const [alert, setAlert] = useState(false)
+
+
+    // login with firebase
+    const handleLogin = async () => {
+        if (formData.email !== '') {
+            await signInWithEmailAndPassword(firebaseAuth, formData.email, formData.password)
+                .then((userCred) => {
+                    if (userCred) {
+
+                        // take data from firestore
+                        getDoc(doc(firestoreDB, 'users', userCred.user.uid))
+                            .then(docSnap => {
+                                if (docSnap.exists()) {
+                                    console.log('user data', docSnap.data());
+                                }
+                            })
+                    }
+                })
+                .catch((err) => {
+                    // alert error 
+                    console.log(err.message);
+                    setAlert(true)
+                    setInterval(() => {
+                        setAlert(false)
+                    }, 5000)
+                })
+        }
+    }
+
+
 
     return (
         <ScrollView className='h-full bg-white' >
@@ -43,13 +77,19 @@ const LoginScreen = () => {
                         <UserInput placeholder='Password' value={formData.password} onChangeText={(text) => handleChange('password', text)} isPass={true} />
                     </View>
 
-                    <TouchableOpacity className='w-full px-4 py-2 rounded-2xl my-3 bg-primary flex items-center justify-center  ' >
+                    {alert
+                        ? (<View className='flex items-start w-full' >
+                            <Text className='text-red-700 text-left' >Invalid email or password</Text>
+                        </View>)
+                        : null}
+
+                    <TouchableOpacity onPress={handleLogin} className='w-full px-4 py-2 rounded-2xl my-3 bg-primary flex items-center justify-center  ' >
                         <Text className='py-2 text-lg text-white' >
                             Sign In
                         </Text>
                     </TouchableOpacity>
 
-                    <View className='flex w-full py-12 flex-row items-center justify-center space-x-2' >
+                    <View className='flex w-full py-5 flex-row items-center justify-center space-x-2' >
                         <Text> Don't have an account?</Text>
                         <TouchableOpacity onPress={() => navigation.navigate("signup")}>
                             <Text className='text-primaryBold font-semibold' >Create Here</Text>
@@ -58,7 +98,7 @@ const LoginScreen = () => {
 
                 </View>
             </View>
-        </ScrollView>
+        </ScrollView >
     )
 }
 
