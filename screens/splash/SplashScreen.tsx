@@ -24,12 +24,12 @@ const SplashScreen = () => {
 
                 redirectTimeout = setTimeout(() => {
                     navigation.replace('home');
-                }, 3000);
+                }, 2000);
 
             } else {
                 redirectTimeout = setTimeout(() => {
                     navigation.replace('login');
-                }, 3000);
+                }, 2000);
             }
         });
 

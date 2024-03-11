@@ -23,7 +23,7 @@ export default function HomeScreen() {
                         <Image className='h-12 w-12' source={{ uri: user.profilePic }} resizeMode='cover' />
                     </TouchableOpacity>
                 </View>
-                <Button title='clisk' onPress={() => navigate.navigate('login')}  ></Button>
+                <Button title='clisk' onPress={() => navigate.navigate('splash')}  ></Button>
             </SafeAreaView>
         </View >
     );
