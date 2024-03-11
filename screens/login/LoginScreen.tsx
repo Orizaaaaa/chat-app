@@ -44,12 +44,13 @@ const LoginScreen = () => {
                 .then((userCred) => {
                     if (userCred) {
 
-                        // take data from firestore
+                        // take data from firestore pass to redux
                         getDoc(doc(firestoreDB, 'users', userCred.user.uid))
                             .then(docSnap => {
                                 if (docSnap.exists()) {
                                     console.log('user data : ', docSnap.data());
                                     dispatch(setUser(docSnap.data()));
+                                    navigation.navigate('home')
                                 }
                             })
                     }
