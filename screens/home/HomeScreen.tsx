@@ -1,23 +1,29 @@
 // HomeScreen.tsx
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, Image, TouchableOpacity } from 'react-native';
 import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../redux/UserSlice';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
-    const dispatch = useDispatch();
-
-    const userList = useSelector((state: { user: { userList: string[] } }) => state.user.userList);
-    console.log('ini data user: ', userList);
+    const user = useSelector((state: any) => state.user.userList)
+    console.log('user : ', user);
 
     const navigate: any = useNavigation()
     return (
-        <View className='flex-1 justify-center items-center bg-red'>
-            <Text className='text-black'>Open up App.tsx to start working on your app! babi HomeScreen</Text>
-            <StatusBar style="auto" />
-            <Button title='go to splash' onPress={() => navigate.navigate('splash')} />
-        </View>
+        <View className='flex-1  '>
+            <SafeAreaView>
+                <View className='w-full flex-row items-center justify-between px-4 py-2' >
+                    <Image className='h-12 w-12' source={require('../../assets/images/logo.png')} resizeMode='contain' />
+                    <TouchableOpacity className='w-12 h-12 rounded-full border border-green-500 flex items-center 
+                    justify-center ' >
+                        <Image className='h-12 w-12' resizeMode='cover' />
+                    </TouchableOpacity>
+                </View>
+                <Button title='clisk' onPress={() => navigate.navigate('login')}  ></Button>
+            </SafeAreaView>
+        </View >
     );
 }
