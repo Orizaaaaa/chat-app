@@ -5,10 +5,16 @@ import { useNavigation } from '@react-navigation/native'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { firebaseAuth, firestoreDB } from '../../config/firebase.config'
 import { doc, getDoc } from 'firebase/firestore'
+import { useDispatch, useSelector } from 'react-redux'
+import { SET_USER, setUser } from '../../redux/action/userAction'
+import Store from '../../redux/store'
+
 
 const LoginScreen = () => {
     const navigation: any = useNavigation();
     const screenWidth = Math.round(Dimensions.get("window").width)
+    const dispatch = useDispatch()
+
 
     // formData
     const [formData, setFormData] = useState({
@@ -42,7 +48,8 @@ const LoginScreen = () => {
                         getDoc(doc(firestoreDB, 'users', userCred.user.uid))
                             .then(docSnap => {
                                 if (docSnap.exists()) {
-                                    console.log('user data', docSnap.data());
+                                    console.log('user data : ', docSnap.data());
+                                    dispatch(setUser(docSnap.data()));
                                 }
                             })
                     }
@@ -57,6 +64,7 @@ const LoginScreen = () => {
                 })
         }
     }
+
 
 
 
