@@ -6,7 +6,8 @@ import { avatars } from '../../utils/utils'
 import { MaterialIcons } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { firebaseAuth } from '../../config/firebase.config'
+import { firebaseAuth, firestoreDB } from '../../config/firebase.config'
+import { doc, setDoc } from 'firebase/firestore'
 
 const SignUpScreen = () => {
     const navigation: any = useNavigation();
@@ -48,8 +49,19 @@ const SignUpScreen = () => {
         if (emailValidate && formData.email !== '') {
             await createUserWithEmailAndPassword(firebaseAuth, formData.email, formData.password)
                 .then(userCred => {
-                    console.log(userCred.user);
 
+                    // firestore interaction
+                    const data = {
+                        _id: userCred.user.uid,
+                        fullName: formData.fullName,
+                        profilePic: avatar,
+                        providerData: userCred.user.providerData[0]
+                    }
+
+                    setDoc(doc(firestoreDB, 'users', userCred.user.uid), data)
+                        .then(() => {
+                            navigation.navigate('login')
+                        })
 
                 })
         } else {
