@@ -1,20 +1,17 @@
 // HomeScreen.tsx
-import { View, Text, Button, Image, TouchableOpacity } from 'react-native';
-import React, { useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { useDispatch, useSelector } from 'react-redux';
-import { addUser } from '../../redux/UserSlice';
+import { View, Text, Button, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { useState } from 'react';
 
 export default function HomeScreen() {
+    const [loading, setLoading] = useState(false)
     const user = useSelector((state: any) => state.user.userList);
-    console.log('user : ', user);
-
-
     const navigate: any = useNavigation()
     return (
-        <View className='flex-1  '>
+        <View className='flex-1'>
             <SafeAreaView>
                 <View className='w-full flex-row items-center justify-between px-4 py-2' >
                     <Image className='h-12 w-12' source={require('../../assets/images/logo.png')} resizeMode='contain' />
@@ -23,8 +20,47 @@ export default function HomeScreen() {
                         <Image className='h-12 w-12' source={{ uri: user.profilePic }} resizeMode='cover' />
                     </TouchableOpacity>
                 </View>
-                <Button title='clisk' onPress={() => navigate.navigate('splash')}  ></Button>
+                <ScrollView className='w-full px-4 pt-4'>
+                    <View className='w-full' >
+                        <View className='w-full flex-row items-center justify-between px-2'>
+                            <Text className='text-primaryText text-base font-extrabold pb-2' >
+                                Messages
+                            </Text>
+                            <TouchableOpacity><Ionicons name='chatbox' size={28} color={'#555'} /></TouchableOpacity>
+                        </View>
+                        {loading ?
+                            <View className='w-full flex items-center justify-center' >
+                                <ActivityIndicator size={'large'} color={'#43C651'} />
+                            </View>
+                            :
+                            <>
+                                <MessageCard />
+                                <MessageCard />
+                                <MessageCard />
+                            </>
+
+                        }
+                    </View>
+                </ScrollView>
             </SafeAreaView>
         </View >
     );
+}
+
+const MessageCard = () => {
+    return (
+        <TouchableOpacity className='w-full flex-row items-center justify-start py-2' >
+            <View className='h-16 w-16 rounded-full flex items-center justify-center border-2 border-green-500 p-1' >
+                <FontAwesome5 name='users' size={24} color={'#555'} />
+            </View>
+
+            <View className='flex-1 flex items-start justify-center ml-4'>
+                <Text className='text-primaryText text-base font-semibold capitalize' >Message Tittle</Text>
+                <Text className='text-primaryText text-sm' >Lorem ipsum dolor sit amet consectetur adipisicing elit ... </Text>
+            </View>
+
+            <Text className='text-primary px-4 text-base font-semibold' >27 min</Text>
+
+        </TouchableOpacity>
+    )
 }
