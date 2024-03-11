@@ -5,11 +5,14 @@ import { useNavigation } from '@react-navigation/native'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { firebaseAuth, firestoreDB } from '../../config/firebase.config'
 import { doc, getDoc } from 'firebase/firestore'
+import { useDispatch } from 'react-redux'
+import { addUser } from '../../redux/UserSlice'
 
 
 
 
 const LoginScreen = () => {
+    const dispatch = useDispatch()
     const navigation: any = useNavigation();
     const screenWidth = Math.round(Dimensions.get("window").width)
 
@@ -46,6 +49,7 @@ const LoginScreen = () => {
                             .then(docSnap => {
                                 if (docSnap.exists()) {
                                     console.log('user data : ', docSnap.data());
+                                    dispatch(addUser(docSnap.data()))
                                     navigation.navigate('home')
                                 }
                             })
