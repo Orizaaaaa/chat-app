@@ -7,6 +7,7 @@ import SignUpScreen from './screens/signup/SignUpScreen';
 import SplashScreen from './screens/splash/SplashScreen';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import AddToChatScreen from './screens/addChatScreen/AddToChatScreen';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <Stack.Screen name="login" component={LoginScreen} />
           <Stack.Screen name="signup" component={SignUpScreen} />
           <Stack.Screen name="home" component={HomeScreen} />
+          <Stack.Screen name="addToChat" component={AddToChatScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

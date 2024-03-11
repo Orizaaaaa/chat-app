@@ -26,7 +26,7 @@ export default function HomeScreen() {
                             <Text className='text-primaryText text-base font-extrabold pb-2' >
                                 Messages
                             </Text>
-                            <TouchableOpacity><Ionicons name='chatbox' size={28} color={'#555'} /></TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigate.navigate('addToChat')} ><Ionicons name='chatbox' size={28} color={'#555'} /></TouchableOpacity>
                         </View>
                         {loading ?
                             <View className='w-full flex items-center justify-center' >
