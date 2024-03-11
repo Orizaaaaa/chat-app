@@ -4,12 +4,30 @@ import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { collection, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { firestoreDB } from '../../config/firebase.config';
 
 export default function HomeScreen() {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const user = useSelector((state: any) => state.user.userList);
     const navigate: any = useNavigation()
+
+    // chats
+    const [chats, setChats] = useState([]);
+    useEffect(() => {
+        const chatQuery = query(collection(firestoreDB, 'chats'), orderBy('_id', 'desc'));
+        const unsubscribe = onSnapshot(chatQuery, (querySnapshot) => {
+            const chatRooms: any = querySnapshot.docs.map(doc => doc.data())
+            setChats(chatRooms);
+            setLoading(false)
+        })
+
+        return unsubscribe
+    }, []);
+
+    console.log(chats);
+
     return (
         <View className='flex-1'>
             <SafeAreaView>
@@ -34,9 +52,9 @@ export default function HomeScreen() {
                             </View>
                             :
                             <>
-                                <MessageCard />
-                                <MessageCard />
-                                <MessageCard />
+                                {chats?.map((items, index) => (
+                                    <MessageCard key={index} room={items} />
+                                ))}
                             </>
 
                         }
@@ -47,7 +65,7 @@ export default function HomeScreen() {
     );
 }
 
-const MessageCard = () => {
+const MessageCard = ({ room }: { room: any }) => {
     return (
         <TouchableOpacity className='w-full flex-row items-center justify-start py-2' >
             <View className='h-16 w-16 rounded-full flex items-center justify-center border-2 border-green-500 p-1' >
@@ -55,7 +73,7 @@ const MessageCard = () => {
             </View>
 
             <View className='flex-1 flex items-start justify-center ml-4'>
-                <Text className='text-primaryText text-base font-semibold capitalize' >Message Tittle</Text>
+                <Text className='text-primaryText text-base font-semibold capitalize' >{room.chatName}</Text>
                 <Text className='text-primaryText text-sm' >Lorem ipsum dolor sit amet consectetur adipisicing elit ... </Text>
             </View>
 
