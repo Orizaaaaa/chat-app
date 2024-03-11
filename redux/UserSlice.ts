@@ -7,7 +7,7 @@ const userSlice = createSlice({
     },
     reducers: {
         addUser: (state: any, action) => {
-            state.userList = JSON.stringify(action.payload);
+            state.userList = (action.payload);
         },
 
     }

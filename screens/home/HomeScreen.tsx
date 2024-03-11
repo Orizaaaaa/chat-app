@@ -8,8 +8,9 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
-    const user = useSelector((state: any) => state.user.userList)
+    const user = useSelector((state: any) => state.user.userList);
     console.log('user : ', user);
+
 
     const navigate: any = useNavigation()
     return (
@@ -19,7 +20,7 @@ export default function HomeScreen() {
                     <Image className='h-12 w-12' source={require('../../assets/images/logo.png')} resizeMode='contain' />
                     <TouchableOpacity className='w-12 h-12 rounded-full border border-green-500 flex items-center 
                     justify-center ' >
-                        <Image className='h-12 w-12' resizeMode='cover' />
+                        <Image className='h-12 w-12' source={{ uri: user.profilePic }} resizeMode='cover' />
                     </TouchableOpacity>
                 </View>
                 <Button title='clisk' onPress={() => navigate.navigate('login')}  ></Button>
