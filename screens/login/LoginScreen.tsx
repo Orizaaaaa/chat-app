@@ -5,16 +5,13 @@ import { useNavigation } from '@react-navigation/native'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { firebaseAuth, firestoreDB } from '../../config/firebase.config'
 import { doc, getDoc } from 'firebase/firestore'
-import { useDispatch, useSelector } from 'react-redux'
-import { SET_USER, setUser } from '../../redux/action/userAction'
-import Store from '../../redux/store'
+
+
 
 
 const LoginScreen = () => {
     const navigation: any = useNavigation();
     const screenWidth = Math.round(Dimensions.get("window").width)
-    const dispatch = useDispatch()
-
 
     // formData
     const [formData, setFormData] = useState({
@@ -49,7 +46,6 @@ const LoginScreen = () => {
                             .then(docSnap => {
                                 if (docSnap.exists()) {
                                     console.log('user data : ', docSnap.data());
-                                    dispatch(setUser(docSnap.data()));
                                     navigation.navigate('home')
                                 }
                             })
@@ -57,8 +53,9 @@ const LoginScreen = () => {
                 })
                 .catch((err) => {
                     // alert error 
-                    console.log(err.message);
+                    console.log('error : ', err);
                     setAlert(true)
+
                     setInterval(() => {
                         setAlert(false)
                     }, 5000)
