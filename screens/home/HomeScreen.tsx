@@ -33,7 +33,7 @@ export default function HomeScreen() {
             <SafeAreaView>
                 <View className='w-full flex-row items-center justify-between px-4 py-2' >
                     <Image className='h-12 w-12' source={require('../../assets/images/logo.png')} resizeMode='contain' />
-                    <TouchableOpacity className='w-12 h-12 rounded-full border border-green-500 flex items-center 
+                    <TouchableOpacity onPress={() => navigate.navigate('profile')} className='w-12 h-12 rounded-full border border-green-500 flex items-center 
                     justify-center ' >
                         <Image className='h-12 w-12' source={{ uri: user.profilePic }} resizeMode='cover' />
                     </TouchableOpacity>
