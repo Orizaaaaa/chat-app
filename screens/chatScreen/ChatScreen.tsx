@@ -165,7 +165,7 @@ const ChatScreen = ({ route }: any) => {
                     </ScrollView>
 
                     <View className='w-full flex-row items-center justify-center px-7 pt-2' >
-                        <View className='bg-gray-200 rounded-2xl space-x-4 px-4 flex-row items-center justify-center ' >
+                        <View className='bg-gray-200 py-2 rounded-2xl space-x-4 px-4 flex-row items-center justify-center ' >
                             <TouchableOpacity >
                                 <Entypo name="emoji-happy" size={20} color="#555" />
                             </TouchableOpacity>
