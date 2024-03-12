@@ -66,8 +66,9 @@ export default function HomeScreen() {
 }
 
 const MessageCard = ({ room }: { room: any }) => {
+    const navigate: any = useNavigation()
     return (
-        <TouchableOpacity className='w-full flex-row items-center justify-start py-2' >
+        <TouchableOpacity onPress={() => navigate.navigate('chat', { room: room })} className='w-full flex-row items-center justify-start py-2' >
             <View className='h-16 w-16 rounded-full flex items-center justify-center border-2 border-green-500 p-1' >
                 <FontAwesome5 name='users' size={24} color={'#555'} />
             </View>
