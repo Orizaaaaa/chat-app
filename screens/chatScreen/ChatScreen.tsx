@@ -59,7 +59,7 @@ const ChatScreen = ({ route }: any) => {
 
     return (
         <View className='flex-1' >
-            <View className='w-full  bg-primary px-4 py-6 flex-[0.2]' >
+            <View className='w-full  bg-primary px-4 pb-6 flex-[0.3]' >
                 <View className='flex-row items-center justify-between w-full px-1 py-10' >
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <FontAwesome5 name="chevron-left" size={24} color="#fff" />
@@ -133,14 +133,14 @@ const ChatScreen = ({ route }: any) => {
 
                                             <View className='flex items-center justify-center space-x-2' key={i} style={{ alignSelf: 'flex-start' }}>
                                                 <View className='flex-row items-center justify-center space-x-2' >
-                                                    {/* <Image className='h-12 w-12' source={{ uri: items.user.profilePic }} resizeMode='cover' /> */}
+                                                    <Image className='h-12 w-12' source={{ uri: items.user.profilePic }} resizeMode='cover' />
 
                                                     <View className='m-1' >
 
                                                         {/* message */}
-                                                        <View className='px-4 py-2 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl bg-primary 
+                                                        <View className='px-4 py-2 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl bg-gray-200 
                                                         w-auto relative' >
-                                                            <Text className='text-base font-semibold text-white' >{items.message}</Text>
+                                                            <Text className='text-base font-semibold text-black' >{items.message}</Text>
                                                         </View>
 
                                                         {/* time */}
@@ -164,13 +164,13 @@ const ChatScreen = ({ route }: any) => {
                             )}
                     </ScrollView>
 
-                    <View className='w-full flex-row items-center justify-center px-7' >
+                    <View className='w-full flex-row items-center justify-center px-7 pt-2' >
                         <View className='bg-gray-200 rounded-2xl space-x-4 px-4 flex-row items-center justify-center ' >
                             <TouchableOpacity >
                                 <Entypo name="emoji-happy" size={20} color="#555" />
                             </TouchableOpacity>
 
-                            <TextInput className='flex-1 h-8 text-base text-primaryText font-semibold'
+                            <TextInput className='flex-1 h-8  text-base text-primaryText font-semibold'
                                 placeholder='Type Here...' placeholderTextColor={'#999'} value={message} onChangeText={(e) => setMessage(e)} />
 
                             <TouchableOpacity>
@@ -182,6 +182,7 @@ const ChatScreen = ({ route }: any) => {
                         </TouchableOpacity>
                     </View>
                 </KeyboardAvoidingView>
+
             </View>
         </View>
     )
